@@ -9,6 +9,7 @@ Install the current Supastack checkout into a fresh temporary CODEX_HOME and
 start Codex there.
 
 Options:
+  --cwd DIR    Start Codex in DIR instead of the Supastack checkout.
   --keep-home  Keep the temporary CODEX_HOME after Codex exits.
   --no-auth    Do not copy or import existing Codex authentication.
   --no-launch  Install and validate the plugin without starting Codex.
@@ -24,9 +25,20 @@ EOF
 keep_home=${SUPASTACK_KEEP_CODEX_HOME:-0}
 reuse_auth=${SUPASTACK_REUSE_AUTH:-1}
 launch=1
+launch_cwd=
+launch_cwd_set=0
 
 while [ "$#" -gt 0 ]; do
 	case "$1" in
+		--cwd)
+			if [ "$#" -lt 2 ]; then
+				printf 'Option --cwd requires a directory.\n' >&2
+				exit 2
+			fi
+			launch_cwd=$2
+			launch_cwd_set=1
+			shift 2
+			;;
 		--keep-home)
 			keep_home=1
 			shift
@@ -59,6 +71,17 @@ plugin_root=$repo_root/plugins/supastack
 role_templates=$plugin_root/assets/agent-roles
 codex_bin=${CODEX_BIN:-codex}
 source_codex_home=${CODEX_HOME:-"$HOME/.codex"}
+
+if [ "$launch_cwd_set" = 0 ]; then
+	launch_cwd=$repo_root
+elif [ ! -d "$launch_cwd" ]; then
+	printf 'Codex working directory does not exist or is not a directory: %s\n' "$launch_cwd" >&2
+	exit 2
+elif ! launch_cwd=$(CDPATH='' cd -- "$launch_cwd" && pwd); then
+	printf 'Codex working directory is not accessible: %s\n' "$launch_cwd" >&2
+	exit 2
+fi
+
 trial_parent=${TMPDIR:-/tmp}
 trial_parent=${trial_parent%/}
 trial_codex_home=$(mktemp -d "$trial_parent/supastack-codex.XXXXXX")
@@ -131,4 +154,4 @@ if [ "$launch" = 0 ]; then
 	exit 0
 fi
 
-CODEX_HOME="$trial_codex_home" "$codex_bin" --enable multi_agent_v2 -C "$repo_root" "$@"
+CODEX_HOME="$trial_codex_home" "$codex_bin" --enable multi_agent_v2 -C "$launch_cwd" "$@"

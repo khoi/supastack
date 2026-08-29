@@ -44,7 +44,13 @@ Start with a prompt:
 ./scripts/try-latest.sh -- '$supastack:poteto-mode explain how this subsystem works'
 ```
 
-The launcher creates a private temporary home, reuses an authentication snapshot when available, installs the repository marketplace and plugin, installs all three native agent roles and model defaults, enables multi-agent support, starts Codex, and deletes the home after Codex exits.
+Start Codex in another project while loading Supastack from this checkout:
+
+```bash
+./scripts/try-latest.sh --cwd /absolute/path/to/project -- '$supastack:poteto-mode explain how this subsystem works'
+```
+
+The launcher creates a private temporary home, reuses an authentication snapshot when available, installs the repository marketplace and plugin, installs all three native agent roles and model defaults, enables multi-agent support, starts Codex in the Supastack checkout by default, and deletes the home after Codex exits. `--cwd` accepts an existing directory and changes only the launched Codex workspace.
 
 Useful options:
 
@@ -52,6 +58,7 @@ Useful options:
 ./scripts/try-latest.sh --no-launch
 ./scripts/try-latest.sh --no-auth
 ./scripts/try-latest.sh --keep-home
+./scripts/try-latest.sh --cwd /absolute/path/to/project
 ```
 
 A fresh home has no stale plugin snapshot, so this path always tests the latest checkout without a cachebuster. `--keep-home` retains the isolated installation for inspection.
@@ -98,7 +105,13 @@ Audit the package, every skill, local links, scripts, JSON, and TOML:
 plugins/supastack/scripts/audit-plugin.sh
 ```
 
-The `orch` and `watch-pr` TypeScript tools live under `plugins/supastack/tools/poteto-mode/` and run through small launchers. Their dependencies are installed into a versioned cache under `${CODEX_HOME:-$HOME/.codex}/supastack/tool-cache/`, not into the plugin source:
+Test the isolated development launcher:
+
+```bash
+scripts/try-latest.test.sh
+```
+
+The `orch` and `watch-pr` TypeScript tools live under `plugins/supastack/tools/poteto-mode/` and run through small launchers. The launchers install dependencies into a versioned cache under `${CODEX_HOME:-$HOME/.codex}/supastack/tool-cache/`, outside the plugin source:
 
 ```bash
 plugins/supastack/scripts/orch --help
