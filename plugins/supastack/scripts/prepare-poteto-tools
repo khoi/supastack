@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+
+script_dir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
+source_dir=$script_dir/../tools/poteto-mode
+codex_home=${CODEX_HOME:-"$HOME/.codex"}
+cache_dir=$codex_home/supastack/tool-cache/1.0.0
+
+mkdir -p "$cache_dir"
+rsync -a --exclude='node_modules' "$source_dir/" "$cache_dir/"
+
+printf '%s\n' "$cache_dir"

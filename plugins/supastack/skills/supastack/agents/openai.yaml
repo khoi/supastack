@@ -1,0 +1,6 @@
+interface:
+  display_name: "Supastack"
+  short_description: "Route rigorous engineering work through Supastack"
+  default_prompt: "Use $supastack:supastack to investigate or build this change with explicit verification."
+policy:
+  allow_implicit_invocation: false

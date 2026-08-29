@@ -1,0 +1,21 @@
+# Supastack per-role model choices. Delete a key to use the skill default.
+# "inherit-parent" and "auto" both mean to omit the subagent model override.
+
+feature_refactoring = "gpt-5.6-luna"
+bug_fix = "gpt-5.6-sol"
+perf_issue = "gpt-5.6-sol"
+hillclimb = "gpt-5.6-sol"
+judgment_and_prose = "gpt-5.6-sol"
+hardest_tasks = "gpt-5.6-sol"
+how_explorer = "gpt-5.6-luna"
+how_explainer = "gpt-5.6-sol"
+how_critics = ["gpt-5.6-sol", "gpt-5.6-sol", "gpt-5.6-luna", "gpt-5.6-terra"]
+why_investigators = "gpt-5.6-luna"
+why_synthesizer = "gpt-5.6-sol"
+reflect_tooling = "gpt-5.6-sol"
+reflect_judgment_divergent_synthesizer = "gpt-5.6-sol"
+arena_runners = ["gpt-5.6-sol", "gpt-5.6-sol", "gpt-5.6-luna", "gpt-5.6-terra"]
+arena_cross_judge_pool = ["gpt-5.6-sol", "gpt-5.6-luna", "gpt-5.6-terra"]
+swarm_workers = "gpt-5.6-luna"
+architect_runners = ["gpt-5.6-sol", "gpt-5.6-sol", "gpt-5.6-luna", "gpt-5.6-terra"]
+interrogate_reviewers = ["gpt-5.6-sol", "gpt-5.6-sol", "gpt-5.6-luna", "gpt-5.6-terra"]

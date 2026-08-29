@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+
+script_dir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
+tool_dir=$("$script_dir/prepare-poteto-tools")
+exec bun "$tool_dir/orch/orch.ts" "$@"

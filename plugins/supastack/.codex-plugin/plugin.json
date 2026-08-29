@@ -1,0 +1,35 @@
+{
+  "name": "supastack",
+  "version": "1.0.0",
+  "description": "Rigorous, verifiable engineering workflows for Codex.",
+  "author": {
+    "name": "Khoi"
+  },
+  "homepage": "https://github.com/khoi/supastack",
+  "repository": "https://github.com/khoi/supastack",
+  "license": "MIT",
+  "keywords": [
+    "supastack",
+    "engineering",
+    "workflow",
+    "verification",
+    "subagents"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Supastack",
+    "shortDescription": "Run rigorous engineering workflows in Codex",
+    "longDescription": "Supastack routes engineering work through explicit principles, focused playbooks, independent subagents, and real verification.",
+    "developerName": "Khoi",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use $supastack:poteto-mode to investigate how this subsystem works",
+      "Use $supastack:poteto-mode to build this feature and prove it works"
+    ]
+  }
+}
