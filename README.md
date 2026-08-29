@@ -2,7 +2,7 @@
 
 Supastack is a standalone Codex plugin for rigorous, verifiable engineering workflows. It combines a workflow router, focused skills, engineering principles, native subagent roles, and runtime verification tools.
 
-It includes 46 skills, all 21 principle leaves, all 23 Poteto playbooks, three optional native agent roles, and the Poteto helper tools.
+It includes 46 skills, all 21 principle leaves, 22 routable Poteto playbooks, the Opening a PR delivery helper, three optional native agent roles, and the Poteto helper tools.
 
 Start with the [Supastack guide](plugins/supastack/docs/guide.md) for the workflow families and invocation map.
 
@@ -26,7 +26,7 @@ $supastack:principle-model-the-domain apply this to the new state shape
 
 Each skill contains its complete `SKILL.md` and required references. It does not load a wrapper or compatibility layer.
 
-Poteto Mode selects one of 23 playbooks. Multi-step workflows use `update_plan`, preference gates use `request_user_input`, and explicitly requested persistent goals use `create_goal`. Lower-level agent mechanics use native Codex subagents without naming their frequently changing tool calls.
+Poteto Mode selects one of 22 routable playbooks. Opening a PR is a delivery helper invoked by those workflows when the user requests a PR or an authorized workflow includes one. Multi-step workflows use `update_plan`, preference gates use `request_user_input`, and persistent goals requested by the user use `create_goal`. Lower-level agent mechanics use native Codex subagents without naming low-level tool calls.
 
 ## Try the latest checkout in isolation
 
@@ -78,7 +78,7 @@ Install the optional native roles and default model map:
 /absolute/path/to/supastack/plugins/supastack/scripts/install-agent-roles.sh
 ```
 
-The roles are `supastack_worker`, `supastack_verifier`, and `comment_sicko`. Codex plugins cannot install role TOMLs themselves, so the separate installer is required for persistent use. Skills fall back to built-in Codex roles when these templates are absent.
+The roles are `supastack_worker`, `supastack_verifier`, and `comment_sicko`. Codex plugins cannot install role TOMLs themselves, so persistent use requires the separate installer. Skills fall back to built-in Codex roles when these templates are absent.
 
 After changing the plugin, update its cachebuster and reinstall the snapshot:
 
@@ -123,6 +123,6 @@ plugins/supastack/scripts/worktree-audit .
 
 `make-bot-ui` depends on Grok Bot routine and secret-request capabilities that Codex does not provide. The native skill uses an equivalent exposed integration when one exists and otherwise stops without creating or exposing anything.
 
-External workflows remain capability-dependent. Slack, tracker, observability, analytics, browser, GitHub, Graphite, and app-control steps run only when the matching tool is installed and the action is authorized. Missing runtime control stays a verification gap; a build does not replace real-surface proof.
+External workflows depend on the active capabilities. Slack, tracker, observability, analytics, browser, GitHub, Graphite, and app-control steps require a matching installed tool and authorization for the action. Missing runtime control stays a verification gap; a build does not replace real-surface proof.
 
 Workflow autonomy changes engineering method, not authorization. Codex system, developer, user, sandbox, and approval rules always win.

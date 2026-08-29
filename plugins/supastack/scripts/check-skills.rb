@@ -65,11 +65,16 @@ Dir.glob(File.join(skills_root, "**", "*.{md,yaml,toml}")).sort.each do |path|
   end
 end
 
-playbook_count = Dir.glob(File.join(skills_root, "poteto-mode", "playbooks", "*.md")).length
-problems << "expected 23 native playbooks, found #{playbook_count}" unless playbook_count == 23
+playbook_names = Dir.glob(File.join(skills_root, "poteto-mode", "playbooks", "*.md")).map do |path|
+  File.basename(path)
+end
+problems << "expected 23 playbook files, found #{playbook_names.length}" unless playbook_names.length == 23
+problems << "missing Opening a PR delivery helper" unless playbook_names.include?("opening-a-pr.md")
+routable_count = (playbook_names - ["opening-a-pr.md"]).length
+problems << "expected 22 routable playbooks, found #{routable_count}" unless routable_count == 22
 
 if problems.empty?
-  puts "skill package valid: 46 skills, 23 playbooks"
+  puts "skill package valid: 46 skills, 22 routable playbooks, 1 delivery helper"
   exit 0
 end
 
