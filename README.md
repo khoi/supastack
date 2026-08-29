@@ -2,7 +2,6 @@
 
 Supastack is a standalone Codex plugin for rigorous, verifiable engineering workflows. It combines a workflow router, focused skills, engineering principles, selective native subagents, and runtime verification tools.
 
-It includes 37 skills, all 21 principle leaves, 22 routable Poteto playbooks, the Opening a PR delivery helper, and the Poteto helper tools.
 
 Start with the [Supastack guide](plugins/supastack/docs/guide.md) for the workflow families and invocation map.
 
@@ -97,12 +96,6 @@ Audit the package, every skill, local links, scripts, JSON, and TOML:
 
 ```bash
 plugins/supastack/scripts/audit-plugin.sh
-```
-
-Test the isolated development launcher:
-
-```bash
-scripts/try-latest.test.sh
 ```
 
 The `orch` and `watch-pr` TypeScript tools live under `plugins/supastack/tools/poteto-mode/` and run through small launchers. The launchers install dependencies into a versioned cache under `${CODEX_HOME:-$HOME/.codex}/supastack/tool-cache/`, outside the plugin source:
