@@ -54,9 +54,9 @@ In the new session, invoke:
 $supastack:setup-supastack
 ```
 
-The skill detects models exposed to the current Codex session, shows the mapping, and writes `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml`. A missing key uses Supastack's default. The values `inherit-parent` and `auto` tell a subagent to inherit the parent model.
+The skill detects models and reasoning efforts exposed to the current Codex session, shows the mapping, and writes `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml`. Each role keeps `model` and `reasoning_effort` separate because Codex passes them as separate subagent overrides. A missing key uses Supastack's default. The values `inherit-parent` and `auto` omit only the override where they appear.
 
-Panel keys hold arrays. One entry creates one panel seat, so the array length controls the number of reviewers or candidates. Re-run the setup skill when model access or your preferences change.
+Panel keys hold arrays of model-and-effort selectors. One entry creates one panel seat, so the array length controls the number of reviewers or candidates. Re-run the setup skill when model access or your preferences change.
 
 The setup flow also checks whether the project has a verification skill or another way to drive its real surface. If it finds none, it can offer `$supastack:create-verification-skill`.
 

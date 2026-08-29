@@ -24,7 +24,7 @@ The N candidates will receive the same prompt, so the prompt is the contract. Ge
 
 1. State the artifact each candidate is producing.
 2. Derive the rubric. State what success looks like for *this* task, then turn it into 3-6 concrete gradeable criteria. Concrete: `Adds a --dry-run flag that skips writes`. Vague: `code is correct`. The rubric is the picker's tool in Phase D; candidates only see the task.
-3. Pick the runners. Use `arena_runners` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` when present. Otherwise default to one each on `gpt-5.6-sol`, `gpt-5.6-sol`, `gpt-5.6-luna`, `gpt-5.6-terra`. Spawn more when the arena covers multiple design directions. Same model N times when the work is generation-bound rather than judgment-sensitive.
+3. Pick the runners. Use the selector list in `arena_runners` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` when present. Otherwise default to `gpt-5.6-sol` at `max`, `gpt-5.6-sol` at `max`, `gpt-5.6-luna` at `xhigh`, and `gpt-5.6-terra` at `xhigh`. Pass each selector's `model` and `reasoning_effort` as separate native Codex overrides. A legacy string is a model-only override. Spawn more when the arena covers multiple design directions. Repeat the same selector N times when the work is generation-bound rather than judgment-sensitive.
 4. Assign output paths. Each candidate writes to its own location (a git worktree where possible, otherwise `/tmp/arena-<slug>/candidate-<n>/`). N candidates writing to the same path is shared mutable state and fails the the **separate-before-serializing-shared-state** principle skill test.
 
 ## Phase B: Fan out
@@ -37,7 +37,7 @@ If a candidate fails to produce output, proceed with N-1 and note the dropout in
 
 ## Phase C: Cross-judge
 
-After all Phase B candidates complete, choose one model from `arena_cross_judge_pool` in `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` when present. Otherwise use `gpt-5.6-sol`, `gpt-5.6-luna`, `gpt-5.6-terra`. Prefer a different model family from the parent's. Spawn one read-only judge subagent on that model. It sees the rubric and the candidates by path label, scores each criterion, and recommends a base with rationale. It runs in parallel with the parent's reading in Phase D, not with the candidates themselves. Spawning while candidates are still writing means the judge sees partial or empty outputs and reports them as dropouts.
+After all Phase B candidates complete, choose one selector from `arena_cross_judge_pool` in `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` when present. Otherwise use `gpt-5.6-sol` at `max`, `gpt-5.6-luna` at `xhigh`, and `gpt-5.6-terra` at `xhigh`. Prefer a different model family from the parent's. Spawn one read-only judge subagent with the selector's `model` and `reasoning_effort` passed as separate native Codex overrides. A legacy string is a model-only override. It sees the rubric and the candidates by path label, scores each criterion, and recommends a base with rationale. It runs in parallel with the parent's reading in Phase D, not with the candidates themselves. Spawning while candidates are still writing means the judge sees partial or empty outputs and reports them as dropouts.
 
 ## Phase D: Pick a base
 

@@ -33,19 +33,19 @@ For each candidate, inspect its session metadata and opening user message. Take 
 
 ### 2. Spawn three reviewers in parallel
 
-Spawn three native Codex review subagents in one turn, with the configured model for each. Reviewers may need installed connectors for context lookups (tickets, chat threads, observability traces referenced in the transcript). The prompt forbids file writes; the parent applies edits.
+Spawn three native Codex review subagents in one turn, with the configured selector for each. Pass `model` and `reasoning_effort` as separate native Codex overrides. A legacy string is a model-only override. Reviewers may need installed connectors for context lookups (tickets, chat threads, observability traces referenced in the transcript). The prompt forbids file writes; the parent applies edits.
 
-| Lens | `model` | Prompt template |
+| Lens | Selector | Prompt template |
 |---|---|---|
-| Judgment | your configured `reflect_judgment_divergent_synthesizer` model (default `gpt-5.6-sol`) | `references/judgment-reviewer.md` |
-| Tooling | your configured `reflect_tooling` model (default `gpt-5.6-sol`) | `references/tooling-reviewer.md` |
-| Divergent | your configured `reflect_judgment_divergent_synthesizer` model (default `gpt-5.6-sol`) | `references/divergent-reviewer.md` |
+| Judgment | your configured `reflect_judgment_divergent_synthesizer` selector (default `gpt-5.6-sol` at `max`) | `references/judgment-reviewer.md` |
+| Tooling | your configured `reflect_tooling` selector (default `gpt-5.6-sol` at `max`) | `references/tooling-reviewer.md` |
+| Divergent | your configured `reflect_judgment_divergent_synthesizer` selector (default `gpt-5.6-sol` at `max`) | `references/divergent-reviewer.md` |
 
 Pass each template verbatim, substituting the session path or digest where marked. Reviewers return findings to the parent.
 
 ### 3. Synthesize
 
-Spawn one native Codex synthesizer subagent using the configured `reflect_judgment_divergent_synthesizer` model (default `gpt-5.6-sol`). The synthesizer's quality check includes spot-verifying citations, which can require installed connectors. Use `references/synthesizer.md` verbatim, with each reviewer's full output inlined where marked. The synthesizer returns a structured Accepted / Rejected / Backlog list.
+Spawn one native Codex synthesizer subagent using the configured `reflect_judgment_divergent_synthesizer` selector (default `gpt-5.6-sol` at `max`). Pass `model` and `reasoning_effort` as separate native Codex overrides. A legacy string is a model-only override. The synthesizer's quality check includes spot-verifying citations, which can require installed connectors. Use `references/synthesizer.md` verbatim, with each reviewer's full output inlined where marked. The synthesizer returns a structured Accepted / Rejected / Backlog list.
 
 ### 4. Structural enforcement check
 

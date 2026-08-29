@@ -21,12 +21,12 @@ Call `update_plan` with one entry per phase before launching anything.
 1. State the done predicate and the artifact or report the swarm must return.
 2. Choose the shape. Partition into slices, race N workers on identical briefs, or mix both. For a race or mixed shape, declare `first pass`, `rank all`, or `best-of` before spawning.
 3. Set N from the user or derive it from the shape. N is total workers, not the cloud concurrency limit.
-4. Pick the worker model from `swarm_workers` in `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` when present. Otherwise use `gpt-5.6-luna`. For a model race, name each arm's model up front.
+4. Pick the worker selector from `swarm_workers` in `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` when present. Otherwise use `gpt-5.6-luna` at `xhigh`. Pass `model` and `reasoning_effort` as separate native Codex overrides. A legacy string is a model-only override. For a model race, name each arm's model and reasoning effort up front.
 5. Give each worker its own writable output when it writes. Use a worktree, branch, or `/tmp/swarm-<slug>/worker-<n>/`.
 
 ## Phase B: Fan out
 
-Spawn all N native Codex subagents in one turn with the configured model. Use the `supastack_worker` role when installed, then `worker` or `default` as a fallback. Give each writer exclusive ownership of its output and tell it that other agents share the filesystem. Collect every result before synthesizing the report.
+Spawn all N native Codex subagents in one turn with the configured selector. Use the `supastack_worker` role when installed, then `worker` or `default` as a fallback. Give each writer exclusive ownership of its output and tell it that other agents share the filesystem. Collect every result before synthesizing the report.
 
 When a worker must start from a non-default pushed branch, pass `cloud_base_branch`.
 

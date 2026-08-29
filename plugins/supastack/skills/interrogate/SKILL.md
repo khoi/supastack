@@ -5,7 +5,7 @@ description: "Use for \"interrogate\", \"adversarial review\", \"multi-model rev
 
 # Interrogate
 
-Spawn one reviewer per configured model to adversarially review code changes. Each model gets the same prompt and rubric. The adversarial signal comes from model diversity, not assigned personas. Models differ in blind spots, priors, and reasoning patterns. Agreement across models is high-confidence signal; lone-model findings are worth reading but lower confidence.
+Spawn one reviewer per configured selector to adversarially review code changes. Each reviewer gets the same prompt and rubric. The adversarial signal comes from model diversity, not assigned personas. Models differ in blind spots, priors, and reasoning patterns. Agreement across models is high-confidence signal; lone-model findings are worth reading but lower confidence.
 
 The deliverable is a synthesized verdict. Do NOT auto-apply changes.
 
@@ -32,18 +32,18 @@ Write one clear paragraph. Reviewers challenge whether the work achieves the int
 
 ## Step 3, Spawn Reviewers
 
-Launch all native Codex reviewer subagents in one turn. Use `interrogate_reviewers` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` when present, one reviewer per entry, extending or shrinking the Reviewer A/B/C/D labels below to the configured entry count; otherwise use the table defaults.
+Launch all native Codex reviewer subagents in one turn. Use the selector list in `interrogate_reviewers` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` when present, one reviewer per entry, extending or shrinking the Reviewer A/B/C/D labels below to the configured entry count; otherwise use the table defaults.
 
-| Subagent | Default model |
-|----------|---------------|
-| Reviewer A | `gpt-5.6-sol` |
-| Reviewer B | `gpt-5.6-sol` |
-| Reviewer C | `gpt-5.6-luna` |
-| Reviewer D | `gpt-5.6-terra` |
+| Subagent | Default model | Default reasoning effort |
+|----------|---------------|--------------------------|
+| Reviewer A | `gpt-5.6-sol` | `max` |
+| Reviewer B | `gpt-5.6-sol` | `max` |
+| Reviewer C | `gpt-5.6-luna` | `xhigh` |
+| Reviewer D | `gpt-5.6-terra` | `xhigh` |
 
-Each reviewer is read-only. Use the corresponding configured model when the current Codex subagent interface exposes model overrides.
+Each reviewer is read-only. Pass the corresponding selector's `model` and `reasoning_effort` as separate native Codex overrides when the current interface exposes them. A legacy string is a model-only override.
 
-If a model slug is rejected as unresolvable when you try to spawn the subagent, check the valid slugs in the error, pick the closest equivalent (prefer the highest-reasoning tier of the same family), and spawn with the valid slug. Do not block the review on the slug issue. If the configured value is `inherit-parent` or `auto`, omit the model override instead; never treat those aliases as broken slugs or enter this fallback for them.
+If a model slug or reasoning effort is rejected when you try to spawn the subagent, check the valid options in the error, preserve the model family when possible, and retry with a supported pair. Do not block the review on the selector issue. If either configured field is `inherit-parent` or `auto`, omit only that native override; never pass an alias through as a real model or effort value.
 
 Read `references/reviewer-prompt.md` and fill in the template with:
 1. The stated intent

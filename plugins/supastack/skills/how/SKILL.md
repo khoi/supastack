@@ -42,7 +42,7 @@ Decompose the question into 2-4 parallel exploration angles, each a distinct sli
 
 The right decomposition depends on the question. Use your judgment. Narrow questions: 2 explorers is fine. Broad subsystems: up to 4.
 
-Spawn all native Codex explorer subagents in one turn. Use `how_explorer` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (default `gpt-5.6-luna`) when model overrides are available. Explorers are read-only.
+Spawn all native Codex explorer subagents in one turn. Use the `how_explorer` selector from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (default `gpt-5.6-luna` at `xhigh`). Pass `model` and `reasoning_effort` as separate native Codex overrides when available. A legacy string is a model-only override. Explorers are read-only.
 
 Each explorer gets the same base prompt from `references/explorer-prompt.md` plus a specific exploration angle naming its slice. Each explorer should:
 - Start broad: Glob for relevant directories, Grep for key types/interfaces/class names
@@ -57,7 +57,7 @@ Then proceed to Step 3.
 
 ### Step 2b. Direct Explain (simple questions)
 
-Spawn a single native Codex subagent that explores and explains in one pass. Use `how_explainer` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (default `gpt-5.6-sol`) when model overrides are available. The subagent is read-only.
+Spawn a single native Codex subagent that explores and explains in one pass. Use the `how_explainer` selector from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (default `gpt-5.6-sol` at `max`). Pass `model` and `reasoning_effort` as separate native Codex overrides when available. A legacy string is a model-only override. The subagent is read-only.
 
 The agent does its own exploration (Glob, Grep, Read) and writes the explanation directly. Read `references/explainer-prompt.md` for the communication style and output format. Same structure, just no explorer findings as input.
 
@@ -65,7 +65,7 @@ Proceed to Step 4.
 
 ### Step 3. Synthesize (complex questions only)
 
-Once all explorers return, spawn a single native Codex subagent to synthesize their findings into one coherent explanation. Use `how_explainer` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (default `gpt-5.6-sol`) when model overrides are available. The subagent is read-only.
+Once all explorers return, spawn a single native Codex subagent to synthesize their findings into one coherent explanation. Use the `how_explainer` selector from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (default `gpt-5.6-sol` at `max`). Pass `model` and `reasoning_effort` as separate native Codex overrides when available. A legacy string is a model-only override. The subagent is read-only.
 
 The explainer gets all explorers' findings and writes the human-facing explanation (output format below). Read `references/explainer-prompt.md` for the full prompt template. The explainer reconciles overlapping findings, resolves contradictions, and weaves the slices into a unified picture.
 
@@ -97,9 +97,9 @@ Run the full explain flow above (Steps 1-4). You must understand the architectur
 
 ### Step 2. Spawn Critics
 
-After the explanation is complete, spawn one architectural critic per model in `how_critics` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (defaults `gpt-5.6-sol`, `gpt-5.6-sol`, `gpt-5.6-luna`, `gpt-5.6-terra`), all in one turn.
+After the explanation is complete, spawn one architectural critic per selector in `how_critics` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (defaults `gpt-5.6-sol` at `max`, `gpt-5.6-sol` at `max`, `gpt-5.6-luna` at `xhigh`, `gpt-5.6-terra` at `xhigh`), all in one turn.
 
-Each critic is read-only. Use its configured model when the current Codex subagent interface exposes model overrides. These are minimum reasoning levels. The lead should escalate any model when the architecture warrants deeper analysis.
+Each critic is read-only. Pass its configured `model` and `reasoning_effort` as separate native Codex overrides when the current interface exposes them. A configured reasoning effort is exact. Do not silently escalate it. A legacy string is a model-only override, so its effort inherits from the parent session.
 
 Read `references/critic-prompt.md` for the prompt template. Each critic gets:
 1. The explanation from Step 1 (so they don't re-explore)

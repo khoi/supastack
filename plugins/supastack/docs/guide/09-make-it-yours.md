@@ -8,9 +8,9 @@ Supastack's router carries one engineering style. You can change model assignmen
 $supastack:setup-supastack
 ```
 
-[`$supastack:setup-supastack`](../../skills/setup-supastack/SKILL.md) writes `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml`. It validates model slugs against the current session when Codex exposes a catalog. Array values control panel size for Arena, Architect, How critics, and Interrogate.
+[`$supastack:setup-supastack`](../../skills/setup-supastack/SKILL.md) writes `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml`. It validates model slugs and model-specific reasoning efforts against the current Codex session when the interface exposes them. Each selector stores `model` and `reasoning_effort` separately. Selector arrays control panel size for Arena, Architect, How critics, and Interrogate.
 
-Keep `inherit-parent` or `auto` when a role should use the parent model. Delete a key to restore Supastack's default.
+Use `inherit-parent` or `auto` on either field to omit that override. Delete a key to restore Supastack's default selector.
 
 ## Capture your working style
 

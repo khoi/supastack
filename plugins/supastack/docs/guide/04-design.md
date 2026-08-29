@@ -38,7 +38,7 @@ flowchart LR
     H --> I[Verify]
 ```
 
-The role map in `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` controls the default panel when the current Codex interface supports model overrides.
+The role map in `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` controls the default panel when the current Codex interface supports model and reasoning-effort overrides.
 
 ## Cover independent slices with `swarm`
 

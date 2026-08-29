@@ -117,7 +117,7 @@ Launch all matching investigators in a single message so they run concurrently. 
 
 Subagent config (each):
 - native Codex subagent
-- model: `why_investigators` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (default `gpt-5.6-luna`) when model overrides are available
+- selector: `why_investigators` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (default `gpt-5.6-luna` at `xhigh`); pass `model` and `reasoning_effort` as separate native Codex overrides, while treating a legacy string as a model-only override
 - grant access to the installed connector needed by its evidence category, but instruct it not to write anything
 
 Each investigator gets:
@@ -160,7 +160,7 @@ If your scope assessment suggests a single-commit trivial target where the PR de
 
 ## Step 4. Synthesize
 
-Spawn one native Codex synthesizer subagent. Use `why_synthesizer` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (default `gpt-5.6-sol`) when model overrides are available. Its quality check spot-verifies citations, so grant access to the installed connectors used by the investigators, but instruct it not to write anything.
+Spawn one native Codex synthesizer subagent. Use the `why_synthesizer` selector from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (default `gpt-5.6-sol` at `max`). Pass `model` and `reasoning_effort` as separate native Codex overrides when available. A legacy string is a model-only override. Its quality check spot-verifies citations, so grant access to the installed connectors used by the investigators, but instruct it not to write anything.
 
 The synthesizer gets:
 1. The investigator findings, including any null results and any categories skipped with justification

@@ -29,7 +29,7 @@ Skip Phase A only when the work is genuinely greenfield with no surrounding syst
 
 Run the **arena** skill with the design-sketch task and the Phase A grounding artifacts. Pass `references/runner-prompt.md` as each runner's prompt. Each candidate produces a design package shaped per `references/rationale-template.md`: the caller's usage written first, then the type sketch, function signatures, module map, and prose rationale derived from it.
 
-Use `architect_runners` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (defaults `gpt-5.6-sol`, `gpt-5.6-sol`, `gpt-5.6-luna`, `gpt-5.6-terra`).
+Use the selector list in `architect_runners` from `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml` (defaults `gpt-5.6-sol` at `max`, `gpt-5.6-sol` at `max`, `gpt-5.6-luna` at `xhigh`, `gpt-5.6-terra` at `xhigh`). Pass each selector's `model` and `reasoning_effort` as separate native Codex overrides. A legacy string is a model-only override.
 
 Design it twice. Require at least two structurally distinct candidates before synthesis, even when the first looks sufficient. This is the **exhaust-the-design-space** principle skill made concrete. Whole-shape alternatives, not point fixes inside one shape.
 
