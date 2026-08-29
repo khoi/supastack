@@ -4,7 +4,7 @@ Supastack works best when you state the outcome, constraints, and proof you expe
 
 Use the pages in order for your first task. Each page also stands on its own.
 
-1. [Set up Supastack](./guide/01-setup.md). Install the checkout, add the optional native roles, and choose models.
+1. [Set up Supastack](./guide/01-setup.md). Install the checkout and choose models.
 2. [Route work through Poteto Mode](./guide/02-poteto-mode.md). Write a useful prompt and understand the router.
 3. [Understand the code](./guide/03-understand.md). Use `how` and `why` before editing.
 4. [Design the change](./guide/04-design.md). Use `architect`, `arena`, `swarm`, and `interrogate` where design risk warrants them.
@@ -29,4 +29,4 @@ Next: [Set up Supastack](./guide/01-setup.md).
 
 ## Platform references
 
-The guide follows the current [OpenAI skills and plugins model](https://learn.chatgpt.com/docs/skills-and-plugins), [Codex subagent behavior](https://learn.chatgpt.com/docs/agent-configuration/subagents), and [long-running work guidance](https://learn.chatgpt.com/docs/long-running-work). Workflow examples draw from the MIT-licensed pstack guide and use Supastack's Codex-native roles, paths, tools, and authorization rules.
+The guide follows the current [OpenAI skills and plugins model](https://learn.chatgpt.com/docs/skills-and-plugins), [Codex subagent behavior](https://learn.chatgpt.com/docs/agent-configuration/subagents), and [long-running work guidance](https://learn.chatgpt.com/docs/long-running-work). Workflow examples draw from the MIT-licensed pstack guide and use Supastack's Codex-native skills, paths, tools, and authorization rules.

@@ -1,4 +1,4 @@
-# Supastack per-role Codex choices. Delete a key to use the skill default.
+# Supastack per-workflow Codex choices. Delete a key to use the skill default.
 # Model and reasoning effort are separate native Codex overrides.
 # "inherit-parent" and "auto" mean to omit only the override where they appear.
 

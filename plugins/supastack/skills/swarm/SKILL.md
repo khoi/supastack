@@ -26,11 +26,11 @@ Call `update_plan` with one entry per phase before launching anything.
 
 ## Phase B: Fan out
 
-Spawn all N native Codex subagents in one turn with the configured selector. Use the `supastack_worker` role when installed, then `worker` or `default` as a fallback. Give each writer exclusive ownership of its output and tell it that other agents share the filesystem. Collect every result before synthesizing the report.
+Spawn all N native Codex subagents in one turn with the configured selector. Use Codex's built-in `worker` for implementation, `explorer` for read-only research, and `default` as the fallback. Give each writer exclusive ownership of its output and tell it that other agents share the filesystem. Collect every result before synthesizing the report.
 
 When a worker must start from a non-default pushed branch, pass `cloud_base_branch`.
 
-Every brief stands alone. Include the goal, scope, exact slice or race arm, how to verify, and what to report. Reports use `PASS`, `ISSUES`, or `BLOCKED` with evidence.
+Every brief stands alone. Include the goal, scope, exact slice or race arm, exclusive ownership, how to verify, and what to report. Tell each worker not to broaden scope, spawn agents, or revert concurrent edits. Reports use `PASS`, `ISSUES`, or `BLOCKED` with evidence.
 
 If a worker drops out, proceed with N-1 and note it.
 

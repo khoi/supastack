@@ -37,9 +37,6 @@ ruby -rjson -e 'ARGV.each { |path| JSON.parse(File.read(path)) }' \
 	"$plugin_root/tools/poteto-mode/package.json"
 
 uv run --python 3.12 python -c 'import pathlib, tomllib, sys; [tomllib.loads(pathlib.Path(p).read_text()) for p in sys.argv[1:]]' \
-	"$plugin_root/assets/models.toml" \
-	"$plugin_root/assets/agent-roles/comment-sicko.toml" \
-	"$plugin_root/assets/agent-roles/supastack-worker.toml" \
-	"$plugin_root/assets/agent-roles/supastack-verifier.toml"
+	"$plugin_root/assets/models.toml"
 
 printf 'Supastack plugin audit passed\n'

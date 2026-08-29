@@ -20,10 +20,6 @@ Match the evidence to the surface:
 | Parser or migration | Replay a saved input and compare the output or written records. |
 | Performance | Measure the same fixture before and after under the same harness. |
 
-## Use an independent verifier
-
-The optional `supastack_verifier` role does not repair failures. It reads the selected playbook's verification contract, exercises the artifact, and returns one verdict: `VERIFIED`, `NOT VERIFIED`, or `INCONCLUSIVE`.
-
 Treat missing control capability as a gap. A browser check needs browser control, an Electron or desktop flow needs computer use, and a native app needs its simulator or debugger. Unit tests do not replace a real-surface check because a matching tool is absent.
 
 ## Open and drive the PR by request

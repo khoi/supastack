@@ -10,7 +10,7 @@ From the Supastack repository, run:
 ./scripts/try-latest.sh
 ```
 
-The launcher creates a private temporary `CODEX_HOME`, installs the marketplace and plugin from the current working tree, adds the three native agent roles, and launches Codex. It removes the temporary home when Codex exits.
+The launcher creates a private temporary `CODEX_HOME`, installs the marketplace and plugin from the current working tree, loads the model defaults, and launches Codex. It removes the temporary home when Codex exits.
 
 Use another project as the Codex workspace while loading Supastack from this checkout:
 
@@ -30,23 +30,9 @@ codex plugin marketplace add /absolute/path/to/supastack
 codex plugin add supastack@personal
 ```
 
-Install the optional native roles and default model map:
+Start a new Codex session after installation. A running session keeps the plugin and skill snapshot it loaded at startup.
 
-```bash
-/absolute/path/to/supastack/plugins/supastack/scripts/install-agent-roles.sh
-```
-
-Supastack defines these roles:
-
-| Role | Job |
-| --- | --- |
-| `supastack_worker` | Implements one owned slice after the parent selects a playbook and defines proof. |
-| `supastack_verifier` | Exercises the finished artifact and returns `VERIFIED`, `NOT VERIFIED`, or `INCONCLUSIVE`. |
-| `comment_sicko` | Reviews comments under the narrow rules used by `$supastack:no-comments`. |
-
-Skills fall back to built-in Codex roles when the templates are absent. Start a new Codex session after installation. A running session keeps the plugin and skill snapshot it loaded at startup.
-
-## Choose models by role
+## Choose models by workflow
 
 In the new session, invoke:
 
@@ -54,7 +40,7 @@ In the new session, invoke:
 $supastack:setup-supastack
 ```
 
-The skill detects models and reasoning efforts exposed to the current Codex session, shows the mapping, and writes `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml`. Each role keeps `model` and `reasoning_effort` separate because Codex passes them as separate subagent overrides. A missing key uses Supastack's default. The values `inherit-parent` and `auto` omit only the override where they appear.
+The skill detects models and reasoning efforts exposed to the current Codex session, shows the mapping, and writes `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml`. Each workflow keeps `model` and `reasoning_effort` separate because Codex passes them as separate subagent overrides. A missing key uses Supastack's default. The values `inherit-parent` and `auto` omit only the override where they appear.
 
 Panel keys hold arrays of model-and-effort selectors. One entry creates one panel seat, so the array length controls the number of reviewers or candidates. Re-run the setup skill when model access or your preferences change.
 

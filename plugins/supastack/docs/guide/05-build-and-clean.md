@@ -45,7 +45,7 @@ Supastack uses three separate passes:
 | Pass | Scope |
 | --- | --- |
 | Installed `simplify` skill, or an equivalent local pass | Clarifies recently changed code without changing behavior. |
-| `$supastack:no-comments` | Gives comments to the `comment_sicko` role and fixes accepted structural findings. |
+| `$supastack:no-comments` | Runs a strict comment-only pass, then fixes accepted structural findings. |
 | `$supastack:unslop` | Removes filler and ambiguity from documentation, commit bodies, and PR text. |
 
 Run the comment pass from fresh eyes:
@@ -54,7 +54,7 @@ Run the comment pass from fresh eyes:
 $supastack:no-comments review the current diff.
 ```
 
-The reviewer keeps licenses, public API contracts, and proven external constraints. It flags comments that compensate for unclear code and leaves the parent to decide whether to reshape the code.
+The skill keeps licenses, public API contracts, and proven external constraints. It flags comments that compensate for unclear code, then fixes accepted structural findings in a separate pass.
 
 ## Keep delivery separate from implementation
 

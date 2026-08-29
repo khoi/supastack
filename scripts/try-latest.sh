@@ -68,7 +68,6 @@ done
 script_dir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
 repo_root=$(CDPATH='' cd -- "$script_dir/.." && pwd)
 plugin_root=$repo_root/plugins/supastack
-role_templates=$plugin_root/assets/agent-roles
 codex_bin=${CODEX_BIN:-codex}
 source_codex_home=${CODEX_HOME:-"$HOME/.codex"}
 
@@ -119,10 +118,7 @@ if [ ! -f "$repo_root/.agents/plugins/marketplace.json" ] || [ ! -f "$plugin_roo
 	exit 1
 fi
 
-mkdir -p "$trial_codex_home/agents" "$trial_codex_home/supastack"
-for role_template in "$role_templates"/*.toml; do
-	cp "$role_template" "$trial_codex_home/agents/"
-done
+mkdir -p "$trial_codex_home/supastack"
 cp "$plugin_root/assets/models.toml" "$trial_codex_home/supastack/models.toml"
 
 if [ "$reuse_auth" = 1 ]; then
@@ -147,7 +143,7 @@ CODEX_HOME="$trial_codex_home" "$codex_bin" plugin marketplace add "$repo_root" 
 CODEX_HOME="$trial_codex_home" "$codex_bin" plugin add supastack@personal --json >/dev/null
 
 printf 'Installed the current checkout into %s\n' "$trial_codex_home"
-printf 'Loaded agent roles: supastack_worker, supastack_verifier, comment_sicko\n'
+printf 'Loaded Supastack model defaults.\n'
 
 if [ "$launch" = 0 ]; then
 	CODEX_HOME="$trial_codex_home" "$codex_bin" plugin list

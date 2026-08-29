@@ -2,7 +2,7 @@
 
 Supastack's router carries one engineering style. You can change model assignments or add focused project skills without editing the router itself.
 
-## Configure model roles
+## Configure workflow models
 
 ```text
 $supastack:setup-supastack

@@ -1,8 +1,8 @@
 # Supastack
 
-Supastack is a standalone Codex plugin for rigorous, verifiable engineering workflows. It combines a workflow router, focused skills, engineering principles, native subagent roles, and runtime verification tools.
+Supastack is a standalone Codex plugin for rigorous, verifiable engineering workflows. It combines a workflow router, focused skills, engineering principles, selective native subagents, and runtime verification tools.
 
-It includes 37 skills, all 21 principle leaves, 22 routable Poteto playbooks, the Opening a PR delivery helper, three optional native agent roles, and the Poteto helper tools.
+It includes 37 skills, all 21 principle leaves, 22 routable Poteto playbooks, the Opening a PR delivery helper, and the Poteto helper tools.
 
 Start with the [Supastack guide](plugins/supastack/docs/guide.md) for the workflow families and invocation map.
 
@@ -50,7 +50,7 @@ Start Codex in another project while loading Supastack from this checkout:
 ./scripts/try-latest.sh --cwd /absolute/path/to/project -- '$supastack:poteto-mode explain how this subsystem works'
 ```
 
-The launcher creates a private temporary home, reuses an authentication snapshot when available, installs the repository marketplace and plugin, installs all three native agent roles and model defaults, enables multi-agent support, starts Codex in the Supastack checkout by default, and deletes the home after Codex exits. `--cwd` accepts an existing directory and changes only the launched Codex workspace.
+The launcher creates a private temporary home, reuses an authentication snapshot when available, installs the repository marketplace and plugin, loads the model defaults, enables multi-agent support, starts Codex in the Supastack checkout by default, and deletes the home after Codex exits. `--cwd` accepts an existing directory and changes only the launched Codex workspace.
 
 Useful options:
 
@@ -72,13 +72,7 @@ codex plugin marketplace add /absolute/path/to/supastack
 codex plugin add supastack@personal
 ```
 
-Install the optional native roles and default model map:
-
-```bash
-/absolute/path/to/supastack/plugins/supastack/scripts/install-agent-roles.sh
-```
-
-The roles are `supastack_worker`, `supastack_verifier`, and `comment_sicko`. Codex plugins cannot install role TOMLs themselves, so persistent use requires the separate installer. Skills fall back to built-in Codex roles when these templates are absent.
+In a new session, invoke `$supastack:setup-supastack` when you want to override the models and reasoning efforts used by individual workflows. The inline defaults work without separate setup.
 
 After changing the plugin, update its cachebuster and reinstall the snapshot:
 
