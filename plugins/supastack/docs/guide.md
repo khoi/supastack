@@ -6,13 +6,13 @@ Use the pages in order for your first task. Each page also stands on its own.
 
 1. [Set up Supastack](./guide/01-setup.md). Install the checkout, add the optional native roles, and choose models.
 2. [Route work through Poteto Mode](./guide/02-poteto-mode.md). Write a useful prompt and understand the router.
-3. [Understand the code](./guide/03-understand.md). Use `how`, `why`, `teach`, and `recall` before editing.
+3. [Understand the code](./guide/03-understand.md). Use `how` and `why` before editing.
 4. [Design the change](./guide/04-design.md). Use `architect`, `arena`, `swarm`, and `interrogate` where design risk warrants them.
 5. [Build and clean](./guide/05-build-and-clean.md). Match build work to a playbook, test first when it helps, and remove diff noise.
 6. [Verify and ship](./guide/06-verify-and-ship.md). Exercise the real artifact, open a focused PR, and keep merge authority explicit.
 7. [Run long work](./guide/07-long-running.md). Define done, preserve a decision trail, and choose the right autonomous workflow.
 8. [Steer with principles](./guide/08-principles.md). Use the 21 principle names as precise corrections.
-9. [Make it yours](./guide/09-make-it-yours.md). Configure models, capture your habits, and maintain project verification skills.
+9. [Make it yours](./guide/09-make-it-yours.md). Configure models and author focused project skills.
 10. [Recipes and pitfalls](./guide/10-recipes-and-pitfalls.md). Copy practical prompts and avoid common failure modes.
 
 ## Start with one real task

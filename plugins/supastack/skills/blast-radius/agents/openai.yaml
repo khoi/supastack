@@ -1,6 +1,0 @@
-interface:
-  display_name: "Blast Radius"
-  short_description: "Run this Supastack workflow in Codex"
-  default_prompt: "Use $supastack:blast-radius for this request."
-policy:
-  allow_implicit_invocation: false

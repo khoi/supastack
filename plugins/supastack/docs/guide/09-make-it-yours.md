@@ -1,6 +1,6 @@
 # Make Supastack yours
 
-Supastack's router carries one engineering style. You can change model assignments, capture your own working rules, or add focused project skills without editing the router itself.
+Supastack's router carries one engineering style. You can change model assignments or add focused project skills without editing the router itself.
 
 ## Configure model roles
 
@@ -11,18 +11,6 @@ $supastack:setup-supastack
 [`$supastack:setup-supastack`](../../skills/setup-supastack/SKILL.md) writes `${CODEX_HOME:-$HOME/.codex}/supastack/models.toml`. It validates model slugs and model-specific reasoning efforts against the current Codex session when the interface exposes them. Each selector stores `model` and `reasoning_effort` separately. Selector arrays control panel size for Arena, Architect, How critics, and Interrogate.
 
 Use `inherit-parent` or `auto` on either field to omit that override. Delete a key to restore Supastack's default selector.
-
-## Capture your working style
-
-```text
-$supastack:automate-me
-```
-
-[`$supastack:automate-me`](../../skills/automate-me/SKILL.md) searches Codex sessions for the active workspace, asks which repeated patterns reflect your intent, and uses `skill-creator` to draft a personal mode skill. New project skills go under `.agents/skills/`; personal skills can live under `${CODEX_HOME:-$HOME/.codex}/skills/`.
-
-The generated mode disables implicit invocation by default. Invoke it by name when you want that style. This keeps a broad personal workflow from changing unrelated tasks.
-
-Run Automate Me again to update a mode from sessions created since its last edit.
 
 ## Capture a lesson from one task
 
@@ -45,8 +33,6 @@ Poteto Mode's [Authoring a skill playbook](../../skills/poteto-mode/playbooks/au
 ```text
 $supastack:poteto-mode author a skill for verifying database migrations. Validate it and prepare a PR for review.
 ```
-
-Use `$supastack:create-verification-skill` for a skill that drives a product surface. Its generator includes launch, doctor, evidence, and cleanup requirements that a general skill does not.
 
 ## Write and test the instructions
 

@@ -8,7 +8,7 @@ These prompts state intent and proof without prescribing Supastack's internal se
 $supastack:how trace initialization from the entry point to the first request. Then use $supastack:why to find why the ownership split changed.
 ```
 
-Use one skill when mechanics or history alone answers the question. Use `$supastack:teach` when you need one explanation that combines them.
+Use one skill when mechanics or history alone answers the question. Run both when you need one explanation that combines them.
 
 ## Compare designs
 

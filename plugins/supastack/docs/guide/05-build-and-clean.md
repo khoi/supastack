@@ -38,8 +38,6 @@ $supastack:tdd implement the retry fix from the current context.
 
 [`$supastack:tdd`](../../skills/tdd/SKILL.md) writes the smallest test that fails for the intended reason, then adds the fix and reruns the test. It avoids broad harness construction and brittle mocks when the real command offers stronger proof.
 
-The `typescript-best-practices` skill applies concrete type rules when work touches TypeScript. It favors schema-derived types, exhaustive variants, `unknown` at boundaries, and representations that exclude invalid states.
-
 ## Remove code noise before review
 
 Supastack uses three separate passes:

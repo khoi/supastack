@@ -2,7 +2,7 @@
 
 Supastack is a standalone Codex plugin for rigorous, verifiable engineering workflows. It combines a workflow router, focused skills, engineering principles, native subagent roles, and runtime verification tools.
 
-It includes 46 skills, all 21 principle leaves, 22 routable Poteto playbooks, the Opening a PR delivery helper, three optional native agent roles, and the Poteto helper tools.
+It includes 37 skills, all 21 principle leaves, 22 routable Poteto playbooks, the Opening a PR delivery helper, three optional native agent roles, and the Poteto helper tools.
 
 Start with the [Supastack guide](plugins/supastack/docs/guide.md) for the workflow families and invocation map.
 
@@ -120,8 +120,6 @@ plugins/supastack/scripts/worktree-audit .
 ```
 
 ## Capability limits
-
-`make-bot-ui` depends on Grok Bot routine and secret-request capabilities that Codex does not provide. The native skill uses an equivalent exposed integration when one exists and otherwise stops without creating or exposing anything.
 
 External workflows depend on the active capabilities. Slack, tracker, observability, analytics, browser, GitHub, Graphite, and app-control steps require a matching installed tool and authorization for the action. Missing runtime control stays a verification gap; a build does not replace real-surface proof.
 

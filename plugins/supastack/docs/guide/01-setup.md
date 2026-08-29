@@ -58,8 +58,6 @@ The skill detects models and reasoning efforts exposed to the current Codex sess
 
 Panel keys hold arrays of model-and-effort selectors. One entry creates one panel seat, so the array length controls the number of reviewers or candidates. Re-run the setup skill when model access or your preferences change.
 
-The setup flow also checks whether the project has a verification skill or another way to drive its real surface. If it finds none, it can offer `$supastack:create-verification-skill`.
-
 ## Run your first task
 
 Choose a small change with a visible finish condition:

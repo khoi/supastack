@@ -17,7 +17,7 @@ end
 skill_names = Dir.children(skills_root).select do |name|
   File.file?(File.join(skills_root, name, "SKILL.md"))
 end
-problems << "expected 46 skills, found #{skill_names.length}" unless skill_names.length == 46
+problems << "expected 37 skills, found #{skill_names.length}" unless skill_names.length == 37
 required_names = %w[poteto-mode setup-supastack supastack]
 missing_names = required_names - skill_names
 problems << "missing required skills: #{missing_names.join(', ')}" unless missing_names.empty?
@@ -74,7 +74,7 @@ routable_count = (playbook_names - ["opening-a-pr.md"]).length
 problems << "expected 22 routable playbooks, found #{routable_count}" unless routable_count == 22
 
 if problems.empty?
-  puts "skill package valid: 46 skills, 22 routable playbooks, 1 delivery helper"
+  puts "skill package valid: 37 skills, 22 routable playbooks, 1 delivery helper"
   exit 0
 end
 

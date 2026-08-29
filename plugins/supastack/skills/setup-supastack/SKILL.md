@@ -94,7 +94,3 @@ interrogate_reviewers = [
 ### 6. Confirm
 
 Tell the user the rule was written and that it applies to new sessions. State that Codex receives `model` and `reasoning_effort` as separate subagent overrides. Re-running this skill updates it.
-
-### 7. Offer a verification skill (optional)
-
-Check whether the project has a way to drive the real app for proof (a `verify-*` skill, or an existing harness). If not, offer once: "want a project-local verification skill, so agents can drive the app the way a user does and prove changes work? I can generate one with $supastack:create-verification-skill." On yes, invoke `$supastack:create-verification-skill`. On no, move on without pushing.

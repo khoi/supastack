@@ -1,6 +1,6 @@
 {
   "name": "supastack",
-  "version": "1.0.0",
+  "version": "1.0.0+codex.20260829181604",
   "description": "Rigorous, verifiable engineering workflows for Codex.",
   "author": {
     "name": "Khoi"

@@ -20,34 +20,6 @@ Match the evidence to the surface:
 | Parser or migration | Replay a saved input and compare the output or written records. |
 | Performance | Measure the same fixture before and after under the same harness. |
 
-Use [`$supastack:blast-radius`](../../skills/blast-radius/SKILL.md) when a small-looking diff could affect distant callers. It identifies the safety claim that carries the change and tries to prove that claim by running code.
-
-## Give the project a verification skill
-
-Run this when the repository lacks a repeatable way to drive its real product surface:
-
-```text
-$supastack:create-verification-skill
-```
-
-[`$supastack:create-verification-skill`](../../skills/create-verification-skill/SKILL.md) inspects the repository for launch commands, stable controls, evidence paths, and isolation constraints. It writes `.agents/skills/verify-<app>/` with five operational sections:
-
-- `Launch` starts the artifact and defines readiness.
-- `Doctor` checks whether the instance is safe to drive.
-- `Drive` uses commands and selectors from this repository.
-- `Evidence` defines the proof and its location.
-- `Cleanup` stops only what the verification run created.
-
-The generator also seeds a feature map. Before handoff, it launches the app, drives one mapped feature, captures evidence, cleans up, and checks that cleanup preserved the proof.
-
-As the product changes, run:
-
-```text
-$supastack:maintain-verification-skill
-```
-
-The maintenance skill compares the map with source and drives the live product. It confines corrections to the verification skill and reports product regressions instead of hiding them in documentation.
-
 ## Use an independent verifier
 
 The optional `supastack_verifier` role does not repair failures. It reads the selected playbook's verification contract, exercises the artifact, and returns one verdict: `VERIFIED`, `NOT VERIFIED`, or `INCONCLUSIVE`.
